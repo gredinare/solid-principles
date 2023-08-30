@@ -37,3 +37,7 @@
 ### Repositórios
 
 [SOLID-kotlin](https://github.com/marceloalves95/SOLID-Kotlin)
+
+### Podcasts
+
+[SOLID: Código bom e bonito](https://open.spotify.com/episode/6fRVaqJxqrqilW1sfQh1pk?si=eRUgCrZgQ8Oq2SNECDocjw)
