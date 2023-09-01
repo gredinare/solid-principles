@@ -2,17 +2,29 @@
 
 ## Descrição
 
+### O que é SOLID?
+
+SOLID é um acrõnimo criado por Michael Feathers para observar 5 princípios da programação orientada a objetos que são considerados boas práticas para o desenvolvimento de software.
+
+### Vantagens do SOLID
+
+- Códigos mais fáceis de se manter, de serem adaptados e de se ajustarem a mudanças.
+- Códigos testaveis e de fácil entendimento
+- Códigos que fornecem o máximo de reaproveitamento
+- Aplicações com ciclo de vida maiores
+- Códigos mais limpos e organizados
+
 ## Principios
 
-### SRP - Single Responsability Principle
+### SRP - Single Responsibility Principle (Princípio da Responsabilidade Única)
 
-### OCP - Open Closed Principle
+### OCP - Open Closed Principle (Princípio do Aberto/Fechado)
 
-### LSP - Liskov Substitution Principle
+### LSP - Liskov Substitution Principle (Princípio da Substituição de Liskov)
 
-### ISP - Interface Segregation Principle
+### ISP - Interface Segregation Principle (Princípio da Segregação de Interfaces)
 
-### DIP - Dependency Inversion Principle
+### DIP - Dependency Inversion Principle (Princípio da Inversão de Dependências)
 
 ## Referências
 
@@ -24,6 +36,7 @@
 
 - [Programadores com código sujo : SOLID](https://www.youtube.com/watch?v=J2ugvRObGT4&ab_channel=LucasMontano)
 - [SOLID fica FÁCIL com Essas Ilustrações](https://www.youtube.com/watch?v=6SfrO3D4dHM&ab_channel=FilipeDeschamps)
+- [SOLID - O básico para você programar melhor](https://www.youtube.com/watch?v=mkx0CdWiPRA&ab_channel=C%C3%B3digoFonteTV)
 
 ### Posts
 
