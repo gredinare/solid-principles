@@ -1,5 +1,7 @@
 # SOLID
 
+![SOLID](app/src/main/res/images/SOLID.webp)
+
 ## Descrição
 
 ### O que é SOLID?
