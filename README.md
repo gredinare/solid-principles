@@ -1,6 +1,6 @@
 # SOLID
 
-![SOLID](app/src/main/res/images/SOLID.webp)
+![SOLID](images/SOLID.webp)
 
 ## Descrição
 
@@ -20,28 +20,80 @@ SOLID é um acrõnimo criado por Michael Feathers para observar 5 princípios da
 
 ### SRP - Single Responsibility Principle (Princípio da Responsabilidade Única)
 
-![SRP](app/src/main/res/images/SRP.webp)
+![SRP](images/SRP.webp)
 
->Uma classe deve ter um, e somente um, motivo para mudar.
+>Uma classe deve ter um, e somente uma responsabilidade.
 
 Uma classe deve ter apenas uma responsabilidade dentro do código, ou seja, ela deve ter apenas um motivo para ser alterada.
 Se uma classe tem mais de uma responsabilidade, ela tem mais de um motivo para ser alterada, o que fere o princípio SRP.
 
+#### Como podemos identificar uma classe que esta fora do SRP?
+
+- A classe possui muitos atributos ou métodos.
+- Podemos identificar quando a classe possui muitos "e" ou "ou" em sua descrição.
+- A classe é chamada por clientes que não usam todos os seus atributos e métodos e possui muitas dependências.
+
+#### Códigos exeplos
+
+##### Código fora do SRP
+
+```kotlin
+
+class User(
+    val name: String,
+    val email: String,
+    val password: String
+) {
+    fun save() {
+        // Salva o usuário no banco de dados
+    }
+
+    fun sendEmail() {
+        // Envia um email para o usuário
+    }
+}
+
+```
+
+##### Código dentro do SRP
+
+```kotlin
+
+class User(
+    val name: String,
+    val email: String,
+    val password: String
+) {
+    fun save() {
+        // Salva o usuário no banco de dados
+    }
+}
+
+class EmailSender(
+    val user: User
+) {
+    fun sendEmail() {
+        // Envia um email para o usuário
+    }
+}
+
+```
+
 ### OCP - Open Closed Principle (Princípio do Aberto/Fechado)
 
-![OCP](app/src/main/res/images/OCP.webp)
+![OCP](images/OCP.webp)
 
 ### LSP - Liskov Substitution Principle (Princípio da Substituição de Liskov)
 
-![LSP](app/src/main/res/images/LSP.webp)
+![LSP](images/LSP.webp)
 
 ### ISP - Interface Segregation Principle (Princípio da Segregação de Interfaces)
 
-![ISP](app/src/main/res/images/ISP.webp)
+![ISP](images/ISP.webp)
 
 ### DIP - Dependency Inversion Principle (Princípio da Inversão de Dependências)
 
-![DIP](app/src/main/res/images/DIP.webp)
+![DIP](images/DIP.webp)
 
 ## Referências
 
