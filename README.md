@@ -20,6 +20,8 @@ SOLID é um acrõnimo criado por Michael Feathers para observar 5 princípios da
 
 ### SRP - Single Responsibility Principle (Princípio da Responsabilidade Única)
 
+![SRP](app/src/main/res/images/SRP.webp)
+
 >Uma classe deve ter um, e somente um, motivo para mudar.
 
 Uma classe deve ter apenas uma responsabilidade dentro do código, ou seja, ela deve ter apenas um motivo para ser alterada.
@@ -27,11 +29,19 @@ Se uma classe tem mais de uma responsabilidade, ela tem mais de um motivo para s
 
 ### OCP - Open Closed Principle (Princípio do Aberto/Fechado)
 
+![OCP](app/src/main/res/images/OCP.webp)
+
 ### LSP - Liskov Substitution Principle (Princípio da Substituição de Liskov)
+
+![LSP](app/src/main/res/images/LSP.webp)
 
 ### ISP - Interface Segregation Principle (Princípio da Segregação de Interfaces)
 
+![ISP](app/src/main/res/images/ISP.webp)
+
 ### DIP - Dependency Inversion Principle (Princípio da Inversão de Dependências)
+
+![DIP](app/src/main/res/images/DIP.webp)
 
 ## Referências
 
