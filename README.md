@@ -119,8 +119,6 @@ Separamos as responsabilidades em +2 classes.
 
 Agora, além de cada classe ter somente uma responsabilidade, também podemos reutilizar o código em outras partes do software.
 
----
-
 ## OCP - Open Closed Principle
 
 >**Princípio do Aberto/Fechado:** Uma classe deve ser capaz de ser extendida sem ser modificada
@@ -132,8 +130,6 @@ Promove a Extensibilidade: O princípio do Aberto/Fechado (OCP) incentiva a adi�
 ### Como podemos identificar uma classe que esta fora do OCP?
 
 ### Exemplo
-
----
 
 ## Referências
 
