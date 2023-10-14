@@ -22,7 +22,7 @@ Em resumo, o uso dos princípios do SOLID resulta em software de maior qualidade
 
 ## SRP - Single Responsibility Principle
 
-> Princípio da Responsabilidade Única: uma classe deve ter uma, e somente uma responsabilidade.
+> **Princípio da Responsabilidade Única** - uma classe deve ter uma, e somente uma responsabilidade.
 
 ![SRP](images/SRP.webp)
 
