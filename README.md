@@ -10,32 +10,32 @@ SOLID é um acrõnimo criado por Michael Feathers para observar 5 princípios da
 
 ### Vantagens do SOLID
 
-- Códigos mais fáceis de se manter, de serem adaptados e de se ajustarem a mudanças.
-- Códigos testaveis e de fácil entendimento
-- Códigos que fornecem o máximo de reaproveitamento
-- Aplicações com ciclo de vida maiores
-- Códigos mais limpos e organizados
+O uso dos princípios SOLID traz diversas vantagens para o desenvolvimento de software, aqui estão algumas das que eu encontrei:
 
-## Principios
+- **Facilita a manutenção:** O SOLID propõe uma abordagem de código mais limpo e organizada, tornando o software mais fácil de entender e manter, isso reduz a probabilidade de erros e facilita a correção de bugs.
+- **Aumenta a reutilização de código:** Implementações que aderem ao SOLID, de forma geral são mais coesas e possuem menos acoplamento, o que possibilita a reutilização de código em diversas partes do software.
+- **Melhora a testabilidade:** Classes que seguem o SOLID tendem a ser mais fáceis de testar, pois possuem apenas 1 responsabilidade e são claramente definidas, isso facilita a criação de testes unitários.
+- **Aumenta a compreensão do código:** Códigos que seguem os príncipios SOLID são mais legíveis e compreensíveis, facilitando a colaboração entre outros membros da equipe e a manutenção a longo prazo.
+- **Melhora a arquitetura de forma geral:** O SOLID contribui para uma arquitetura de software mais robusta e flexível, tornando o software adaptável a mudanças nos requisitos e nas necessidades dos usuários.
 
-### SRP - Single Responsibility Principle (Princípio da Responsabilidade Única)
+Em resumo, o uso dos princípios do SOLID resulta em software de maior qualidade, mais flexível e fácil de manter. Isso é crucial em projetos de desenvolvimento de software de longo prazo, nos quais a escalabilidade e a manutenção são fatores críticos para o sucesso.
+
+## SRP - Single Responsibility Principle (Princípio da Responsabilidade Única)
+
+>Uma classe deve ter uma, e somente uma responsabilidade.
 
 ![SRP](images/SRP.webp)
 
->Uma classe deve ter um, e somente uma responsabilidade.
+Uma classe deve ter apenas uma responsabilidade dentro do código, ou seja, ela deve ter apenas um motivo para existir.
+Se uma classe tem mais de uma responsabilidade, ela tem mais de um motivo para ser alterada.
 
-Uma classe deve ter apenas uma responsabilidade dentro do código, ou seja, ela deve ter apenas um motivo para ser alterada.
-Se uma classe tem mais de uma responsabilidade, ela tem mais de um motivo para ser alterada, o que fere o princípio SRP.
-
-#### Como podemos identificar uma classe que esta fora do SRP?
+### Como podemos identificar uma classe que esta fora do SRP?
 
 - A classe possui muitos atributos ou métodos.
 - Podemos identificar quando a classe possui muitos "e" ou "ou" em sua descrição.
-- A classe é chamada por clientes que não usam todos os seus atributos e métodos e possui muitas dependências.
+- A classe é chamada por clientes que não usam todos os seus atributos, métodos e/ou possui muitas dependências.
 
-#### Códigos exeplos
-
-##### Código fora do SRP
+### Exemplo: errado
 
 ```kotlin
 
@@ -48,14 +48,24 @@ class User(
         // Salva o usuário no banco de dados
     }
 
-    fun sendEmail() {
+    fun sendEmail(user: User) {
         // Envia um email para o usuário
     }
 }
 
 ```
 
-##### Código dentro do SRP
+Como podemos ver no exemplo, a classe User, é responsável por:
+
+- Gerenciar os parâmetros de um usuário
+- Salvar o usuário no bando de dados
+- Enviar um email para um usuário
+
+Isso gera um alto acoplamento, e não conseguimos reutilizar o código em outras partes do software.
+
+### Exemplo: certo
+
+Refatorando e aplicando o SRP na classe user, teremos o seguinte código:
 
 ```kotlin
 
@@ -63,37 +73,31 @@ class User(
     val name: String,
     val email: String,
     val password: String
-) {
-    fun save() {
-        // Salva o usuário no banco de dados
+)
+
+class DataBase() {
+    fun saveUser(user: User) {
+        // Salva um usuário no banco de dados
     }
 }
 
-class EmailSender(
-    val user: User
-) {
-    fun sendEmail() {
+class EmailSender() {
+    fun sendEmail(sender: User, recipient: User) {
         // Envia um email para o usuário
     }
 }
 
 ```
 
-### OCP - Open Closed Principle (Princípio do Aberto/Fechado)
+Separamos as responsabilidades em +2 classes.
 
-![OCP](images/OCP.webp)
+- A classe user fica responsável somente por gerenciar os parâmetros de um usuário.
+- A classe database é responsável por gerenciar o bando de dados, então ela pode salvar, deletar e exibir um usuário.
+- A classe emailsender é responsável pelo envio de emails de um usuário a outro.
 
-### LSP - Liskov Substitution Principle (Princípio da Substituição de Liskov)
+Agora, além de cada classe ter somente uma responsabilidade, também podemos reutilizar o código em outras partes do software.
 
-![LSP](images/LSP.webp)
-
-### ISP - Interface Segregation Principle (Princípio da Segregação de Interfaces)
-
-![ISP](images/ISP.webp)
-
-### DIP - Dependency Inversion Principle (Princípio da Inversão de Dependências)
-
-![DIP](images/DIP.webp)
+---
 
 ## Referências
 
