@@ -43,9 +43,21 @@ Se uma classe tem mais de uma responsabilidade, ela tem mais de um motivo para s
 
 ### Como podemos identificar uma classe que esta fora do SRP?
 
-- A classe possui muitos atributos ou métodos.
-- Podemos identificar quando a classe possui muitos "e" ou "ou" em sua descrição.
-- A classe é chamada por clientes que não usam todos os seus atributos, métodos e/ou possui muitas dependências.
+Identificar uma classe que não está seguindo o princípio da Responsabilidade Única (SRP) pode ser feito observando seu comportamento e responsabilidades. Aqui estão algumas dicas para identificar classes que violam o SRP:
+
+**Número de Responsabilidades:** Se uma classe está desempenhando múltiplas funções ou responsabilidades, é provável que esteja violando o SRP. Por exemplo, se uma classe é responsável por armazenar dados, realizar cálculos e interagir com uma base de dados, isso é um sinal de que a classe pode ter múltiplas responsabilidades.
+
+**Verbos no Nome da Classe ou Métodos:** Um indicativo de que uma classe pode estar violando o SRP é se o nome da classe ou os nomes dos métodos contêm verbos que descrevem várias ações. Classes devem geralmente ter nomes que representam substantivos ou entidades e métodos com nomes que descrevem uma única ação.
+
+**Complexidade dos Métodos:** Se os métodos de uma classe são muito longos e realizam uma variedade de tarefas diferentes, isso é um sinal de que a classe pode ter várias responsabilidades. Métodos muito longos e complexos geralmente indicam falta de coesão.
+
+**Dependências Excessivas:** Se uma classe depende de muitas outras classes ou módulos, especialmente para finalidades diferentes, isso pode ser um indício de falta de responsabilidade única. Classes com muitas dependências tendem a ser mais difíceis de manter e entender.
+
+**Frequente Necessidade de Alterações na Classe:** Se você perceber que sempre precisa fazer alterações na mesma classe para acomodar diferentes requisitos ou mudanças de negócio, isso pode ser um sinal de que a classe está sobrecarregada com responsabilidades.
+
+**Teste de Unidade Complexos:** Se escrever testes de unidade para a classe é complexo e requer muitos cenários diferentes, isso pode indicar uma violação do SRP. Classes com múltiplas responsabilidades tendem a ser difíceis de testar de forma isolada.
+
+**Feedback dos Colegas de Desenvolvimento:** A revisão de código por colegas de desenvolvimento também é uma ótima maneira de identificar problemas de design, incluindo violações do SRP. Peça feedback e opiniões sobre se uma classe parece estar fazendo muito.
 
 ### Exemplo
 
