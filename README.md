@@ -20,8 +20,9 @@ O uso dos princípios SOLID traz diversas vantagens para o desenvolvimento de so
 
 Em resumo, o uso dos princípios do SOLID resulta em software de maior qualidade, mais flexível e fácil de manter. Isso é crucial em projetos de desenvolvimento de software de longo prazo, nos quais a escalabilidade e a manutenção são fatores críticos para o sucesso.
 
-## SRP - Single Responsibility Principle (Princípio da Responsabilidade Única)
+## SRP - Single Responsibility Principle
 
+>Princípio da Responsabilidade Única
 >Uma classe deve ter uma, e somente uma responsabilidade.
 
 ![SRP](images/SRP.webp)
