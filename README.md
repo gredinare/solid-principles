@@ -20,9 +20,21 @@ O uso dos princípios SOLID traz diversas vantagens para o desenvolvimento de so
 
 Em resumo, o uso dos princípios do SOLID resulta em software de maior qualidade, mais flexível e fácil de manter. Isso é crucial em projetos de desenvolvimento de software de longo prazo, nos quais a escalabilidade e a manutenção são fatores críticos para o sucesso.
 
+## Os princípios SOLID
+
+1. **Princípio da Responsabilidade Única (SRP - Single Responsibility Principle):** Este princípio afirma que uma classe deve ter apenas uma razão para mudar. Em outras palavras, uma classe deve ter apenas uma responsabilidade ou tarefa específica no sistema. Isso ajuda a evitar classes inchadas que fazem muitas coisas e torna o código mais fácil de entender e manter.
+
+2. **Princípio do Aberto/Fechado (OCP - Open/Closed Principle):** O OCP estabelece que as entidades de software (classes, módulos, etc.) devem estar abertas para extensão, mas fechadas para modificação. Isso significa que você deve poder adicionar novos recursos ou comportamentos sem alterar o código existente.
+
+3. **Princípio da Substituição de Liskov (LSP - Liskov Substitution Principle):** Este princípio diz que objetos de uma classe derivada devem ser capazes de substituir objetos da classe base sem afetar a integridade do programa. Em outras palavras, as subclasses devem ser compatíveis com as superclasses.
+
+4. **Princípio da Segregação de Interfaces (ISP - Interface Segregation Principle):** O ISP sugere que as interfaces de uma classe devem ser segregadas em interfaces menores e mais específicas, em vez de ter uma única interface grande. Isso evita que as classes implementem métodos que não precisam, tornando o código mais coeso.
+
+5. **Princípio da Inversão de Dependência (DIP - Dependency Inversion Principle):** O DIP enfatiza que as classes de alto nível não devem depender de classes de baixo nível, mas sim de abstrações. Além disso, ele incentiva a inversão do controle, permitindo que módulos de baixo nível dependam de abstrações, tornando o código mais flexível e facilmente adaptável a mudanças.
+
 ## SRP - Single Responsibility Principle
 
-> **Princípio da Responsabilidade Única:** uma classe deve ter uma, e somente uma responsabilidade.
+>**Princípio da Responsabilidade Única:** uma classe deve ter uma, e somente uma responsabilidade.
 
 ![SRP](images/SRP.webp)
 
@@ -35,7 +47,7 @@ Se uma classe tem mais de uma responsabilidade, ela tem mais de um motivo para s
 - Podemos identificar quando a classe possui muitos "e" ou "ou" em sua descrição.
 - A classe é chamada por clientes que não usam todos os seus atributos, métodos e/ou possui muitas dependências.
 
-### Exemplo: errado
+### Exemplo
 
 ```kotlin
 
@@ -62,8 +74,6 @@ Como podemos ver no exemplo, a classe User, é responsável por:
 - Enviar um email para um usuário
 
 Isso gera um alto acoplamento, e não conseguimos reutilizar o código em outras partes do software.
-
-### Exemplo: certo
 
 Refatorando e aplicando o SRP na classe user, teremos o seguinte código:
 
@@ -96,6 +106,20 @@ Separamos as responsabilidades em +2 classes.
 - A classe emailsender é responsável pelo envio de emails de um usuário a outro.
 
 Agora, além de cada classe ter somente uma responsabilidade, também podemos reutilizar o código em outras partes do software.
+
+---
+
+## OCP - Open Closed Principle
+
+>**Princípio do Aberto/Fechado:** Uma classe deve ser capaz de ser extendida sem ser modificada
+
+![OCP](images/OCP.webp)
+
+Promove a Extensibilidade: O princípio do Aberto/Fechado (OCP) incentiva a adição de novos recursos sem modificar o código existente. Isso torna o software mais extensível, permitindo a evolução do sistema de forma mais suave.
+
+### Como podemos identificar uma classe que esta fora do OCP?
+
+### Exemplo
 
 ---
 
