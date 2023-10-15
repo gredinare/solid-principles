@@ -192,7 +192,7 @@ class PagamentoBoleto : MeioPagamento {
 ```
 
 Agora, cada tipo de pagamento deve implementar seu próprio tipo de pagamento usando a interface MeioPagamento.
-Isso diminui as chances de gerar bugs no código, já que não vamos mais precisar modificar casos que já existem e funcionam no software.
+Isso diminui as chances de gerar bugs no código, já que não vamos mais precisar modificar classes que já existem e se precisar, podemos extender seus comportamentos.
 
 ## Referências
 
