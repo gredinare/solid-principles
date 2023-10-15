@@ -79,7 +79,7 @@ class User(
 
 ```
 
-Como podemos ver no exemplo, a classe User, é responsável por:
+Como podemos ver no exemplo, a classe `User`, é responsável por:
 
 - Gerenciar os parâmetros de um usuário
 - Salvar o usuário no bando de dados
@@ -87,7 +87,7 @@ Como podemos ver no exemplo, a classe User, é responsável por:
 
 Isso gera um alto acoplamento, e não conseguimos reutilizar o código em outras partes do software.
 
-Refatorando e aplicando o SRP na classe user, teremos o seguinte código:
+Refatorando e aplicando o SRP na classe `User`, teremos o seguinte código:
 
 ```kotlin
 
@@ -113,9 +113,9 @@ class EmailSender() {
 
 Separamos as responsabilidades em +2 classes.
 
-- A classe user fica responsável somente por gerenciar os parâmetros de um usuário.
-- A classe database é responsável por gerenciar o bando de dados, então ela pode salvar, deletar e exibir um usuário.
-- A classe emailsender é responsável pelo envio de emails de um usuário a outro.
+- A classe `User` fica responsável somente por gerenciar os parâmetros de um usuário.
+- A classe `DataBase` é responsável por gerenciar o bando de dados, então ela pode salvar, deletar e exibir um usuário.
+- A classe `EmailSender` é responsável pelo envio de emails de um usuário a outro.
 
 Agora, além de cada classe ter somente uma responsabilidade, também podemos reutilizar o código em outras partes do software.
 
@@ -159,7 +159,7 @@ class Pagamento {
 
 ```
 
-A classe Pagamento é responsável por processar o pagamento, seja por cartão de crédito ou paypal...
+A classe `Pagamento` é responsável por processar o pagamento, seja por cartão de crédito ou paypal...
 Porém se amanhã o software começar a aceitar pagamentos por boleto vamos precisar acrescetar uma nova condição, isso fere diretamente o príncipio OCP, já que vamos ter que modificar uma classe toda vez que incluirmos um novo tipo de pagamento.
 
 Para isso, podemos abstrair o comportamento extensível por trás de uma interface, e inverter as dependências.
@@ -191,8 +191,69 @@ class PagamentoBoleto : MeioPagamento {
 
 ```
 
-Agora, cada tipo de pagamento deve implementar seu próprio tipo de pagamento usando a interface MeioPagamento.
+Agora, cada tipo de pagamento deve implementar seu próprio tipo de pagamento usando a interface `MeioPagamento`.
 Isso diminui as chances de gerar bugs no código, já que não vamos mais precisar modificar classes que já existem e se precisar, podemos extender seus comportamentos.
+
+## LSP - Liskov Substitution Principle
+
+>**Princípio da Substituição de Liskov:** Uma classe derivada deve ser substituída por sua classe base sem inteferir no funcionamento do software.
+
+![LSP](images/LSP.webp)
+
+Se S é um subtipo de T então os objetos do tipo T em um programa podem ser subtituídos por objetos do tipo S sem a necessidade de alterar as condições do software.
+
+### Como podemos identificar uma classe que esta fora do LSP?
+
+Para identificar uma classe que está violando o Princípio da Substituição de Liskov (LSP), você deve observar como a classe se comporta em relação à hierarquia de herança e as expectativas que geralmente se aplicam a classes base e derivadas. Aqui estão algumas dicas para identificar uma classe que não está aderindo ao LSP:
+
+**Métodos com Comportamento Diferente:** Se uma classe derivada (subclasse) substitui um método da classe base (superclasse) e seu comportamento é significativamente diferente ou diverge do comportamento esperado pela classe base, isso pode ser um sinal de violação do LSP.
+
+**Pré-condições e Pós-condições Divergentes:** O LSP pressupõe que as pré-condições (restrições que devem ser atendidas antes da execução de um método) e pós-condições (expectativas após a execução de um método) não devem ser alteradas nas classes derivadas. Se uma classe derivada modificar essas condições de maneira incompatível com a classe base, o LSP está sendo violado.
+
+**Exceções Não Esperadas:** Se uma classe derivada lança exceções que a classe base não lança, ou se não trata as exceções que a classe base trata, isso é um indicativo de que o LSP está sendo violado.
+
+**Métodos Não Implementados:** Se uma classe derivada não implementar todos os métodos definidos na classe base, isso viola o contrato de herança e, portanto, o LSP.
+
+**Mudanças no Estado do Objeto:** Se uma classe derivada modifica o estado interno do objeto de maneira incompatível com a classe base, isso pode quebrar as expectativas e violar o LSP.
+
+**Retorno de Valores Divergentes:** Se uma classe derivada substitui um método e retorna um tipo de dado incompatível com o que é retornado pelo método da classe base, isso é uma violação do LSP.
+
+**Comentários de Documentação:** Às vezes, as violações do LSP são documentadas nos comentários ou na documentação do código. Se você encontrar documentação que alerta sobre o comportamento inesperado da classe derivada, é um sinal de que o LSP pode estar sendo violado.
+
+**Testes Unitários Inconsistentes:** Testes unitários que passam em instâncias da classe base, mas falham quando a classe derivada é usada em seu lugar, podem indicar violações do LSP.
+
+### Exemplo LSP
+
+```kotlin
+
+open class A {
+    open fun getNome() {
+        println("Meu nome é A")
+    }
+}
+
+class B : A() {
+    override fun getNome() {
+        println("Meu nome é B")
+    }
+}
+
+fun imprimeNome(objeto: A) {
+    objeto.getNome()
+}
+
+fun main() {
+    val a = A()
+    val b = B()
+
+    imprimeNome(a) // Meu nome é A
+    imprimeNome(b) // Meu nome é B
+}
+
+```
+
+Temos uma classe `A` e uma classe `B`, sendo que `B` extende de `A` e também sobreescreve o método `getNome`.
+Também temos a função `imprimeNome` que recebe um objeto do tipo `A` como parâmetro, e ao chamat a função getNome, 
 
 ## Referências
 
