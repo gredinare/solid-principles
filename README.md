@@ -59,7 +59,7 @@ Identificar uma classe que não está seguindo o princípio da Responsabilidade 
 
 **Feedback dos Colegas de Desenvolvimento:** A revisão de código por colegas de desenvolvimento também é uma ótima maneira de identificar problemas de design, incluindo violações do SRP. Peça feedback e opiniões sobre se uma classe parece estar fazendo muito.
 
-### Exemplo
+### Exemplo SRP
 
 ```kotlin
 
@@ -129,7 +129,70 @@ Promove a Extensibilidade: O princípio do Aberto/Fechado (OCP) incentiva a adi�
 
 ### Como podemos identificar uma classe que esta fora do OCP?
 
-### Exemplo
+Identificar uma classe que está violando o Princípio Aberto/Fechado (OCP) pode ser feito observando o comportamento da classe e sua reação às mudanças nos requisitos. Aqui estão algumas dicas para identificar uma classe que não está aderindo ao OCP:
+
+**Necessidade de Modificações Frequentes:** Se você perceber que a classe está sujeita a mudanças frequentes sempre que novos requisitos ou funcionalidades são adicionados, isso pode ser um sinal de que ela não está aberta para extensão, como preconiza o OCP. Em vez disso, está sendo constantemente modificada.
+
+**Classe com Muitas Condições:** Se a classe possui várias estruturas condicionais (if/else) para lidar com diferentes casos ou cenários, isso pode ser um sinal de que a classe não está fechada para modificação. Novos casos exigirão alterações diretas na classe.
+
+**Herança Excessiva:** Se a classe está usando herança extensivamente para adicionar funcionalidades, isso pode indicar uma violação do OCP. Em vez disso, o OCP promove o uso de composição e interfaces para estender funcionalidades.
+
+**Classes Monolíticas:** Classes muito grandes que realizam muitas tarefas diferentes sem seguir uma estrutura modular podem ser difíceis de estender sem modificar o código existente.
+
+**Métodos com Vários Propósitos:** Métodos que fazem muitas coisas diferentes ou que lidam com múltiplos casos de uso podem indicar uma falta de extensibilidade.
+
+**Feedback de Revisões de Código:** A revisão de código por colegas de desenvolvimento muitas vezes revela problemas relacionados ao OCP. Se outros membros da equipe identificam a necessidade frequente de alterações na classe, pode ser um indicativo de uma violação do OCP.
+
+### Exemplo OCP
+
+```kotlin
+
+class Pagamento {
+    fun processarPagamento(tipo: String, valor: Double) {
+        if (tipo == "CartaoCredito") {
+            // Processar pagamento com cartão de crédito
+        } else if (tipo == "PayPal") {
+            // Processar pagamento via PayPal
+        }
+    }
+}
+
+```
+
+A classe Pagamento é responsável por processar o pagamento, seja por cartão de crédito ou paypal...
+Porém se amanhã o software começar a aceitar pagamentos por boleto vamos precisar acrescetar uma nova condição, isso fere diretamente o príncipio OCP, já que vamos ter que modificar uma classe toda vez que incluirmos um novo tipo de pagamento.
+
+Para isso, podemos abstrair o comportamento extensível por trás de uma interface, e inverter as dependências.
+Veja como ficaria o exemplo refatorado:
+
+```kotlin
+
+interface MeioPagamento {
+    fun processarPagamento(valor: Double)
+}
+
+class PagamentoCartaoCredito : MeioPagamento {
+    override fun processarPagamento(valor: Double) {
+        // Lógica para processar pagamento com cartão de crédito
+    }
+}
+
+class PagamentoPayPal : MeioPagamento {
+    override fun processarPagamento(valor: Double) {
+        // Lógica para processar pagamento via PayPal
+    }
+}
+
+class PagamentoBoleto : MeioPagamento {
+    override fun processarPagamento(valor: Double) {
+        // Lógica para processar pagamento via boleto
+    }
+}
+
+```
+
+Agora, cada tipo de pagamento deve implementar seu próprio tipo de pagamento usando a interface MeioPagamento.
+Isso diminui as chances de gerar bugs no código, já que não vamos mais precisar modificar casos que já existem e funcionam no software.
 
 ## Referências
 
