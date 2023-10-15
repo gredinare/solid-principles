@@ -252,8 +252,7 @@ fun main() {
 
 ```
 
-Temos uma classe `A` e uma classe `B`, sendo que `B` extende de `A` e também sobreescreve o método `getNome`.
-Também temos a função `imprimeNome` que recebe um objeto do tipo `A` como parâmetro, e ao chamat a função getNome, 
+Temos uma classe `A` e uma classe `B`, sendo que `B` extende de `A` e sobrescreve o método `getNome`. A função `imprimeNome` recebe um objeto do tipo `A` como parâmetro, e ao ser executada faz com que cada classe chame sua própria implementação do método `getNome`.
 
 ## Referências
 
