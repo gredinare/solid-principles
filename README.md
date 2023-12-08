@@ -254,6 +254,142 @@ fun main() {
 
 Temos uma classe `A` e uma classe `B`, sendo que `B` extende de `A` e sobrescreve o método `getNome`. A função `imprimeNome` recebe um objeto do tipo `A` como parâmetro, e ao ser executada faz com que cada classe chame sua própria implementação do método `getNome`.
 
+## ISP - Interface Segregation Principle
+
+> **Princípio da Segregação de Interfaces:** Uma classe não deve ser obrigada a implementar uma interface com métodos que não vai utilizar
+
+![ISP](images/ISP.webp)
+
+Esse príncipio diz basicamente que é melhor termos várias interfaces específicas do que apenas 1 interface genérica
+
+### Como podemos identificar uma classe que esta fora do ISP?
+
+Identificar uma classe que está violando o Princípio da Segregação de Interfaces (ISP) geralmente envolve observar como a classe lida com interfaces, especialmente se ela implementa interfaces que contêm métodos que não são relevantes para o contexto da classe. Aqui estão algumas dicas para identificar uma classe que não está aderindo ao ISP:
+
+**Métodos não utilizados:** Se uma classe implementa uma interface e não utiliza todos os métodos definidos naquela interface, isso pode ser um indicativo de uma violação do ISP. A classe está sendo forçada a fornecer implementações para métodos que não têm relação com sua funcionalidade.
+
+**Interfaces muito grandes:** Se uma classe implementa uma interface muito grande e complexa, contendo muitos métodos, alguns dos quais não são necessários para a classe, isso é um sinal de uma possível violação do ISP. Uma interface deve ser coesa, contendo apenas métodos relacionados a um conjunto de funcionalidades.
+
+**Dependências excessivas:** Se a classe tem muitas dependências em outras classes ou módulos, isso pode ser um sinal de que ela está implementando interfaces desnecessárias, o que vai contra o princípio da segregação de interfaces. Essas dependências podem aumentar a complexidade da classe.
+
+**Alterações frequentes:** Se você observar que as mudanças em outras partes do sistema frequentemente afetam essa classe de maneira indesejada, isso pode ser um indicativo de uma violação do ISP. Uma classe que está forçada a implementar muitos métodos irrelevantes é mais propensa a quebrar quando o sistema muda.
+
+**Comentários ou Documentação:** Às vezes, os desenvolvedores documentam em comentários ou na documentação que uma classe está implementando métodos que não são relevantes para sua funcionalidade. Esses comentários podem ser uma pista de que o ISP não está sendo seguido.
+
+**Feedback de Revisões de Código:** Revisões de código por colegas de desenvolvimento podem revelar problemas relacionados ao ISP. Se outros membros da equipe notam que uma classe implementa interfaces que não têm relação com sua funcionalidade principal, isso é um indicativo de uma possível violação.
+
+### Exemplo ISP
+
+```kotlin
+
+interface Aves {
+    fun setLocalizacao(latitude: Double, longitude: Double)
+    fun renderizar()
+}
+
+interface AvesQueVoam : Aves {
+    fun setAltitude(altitude: Double)
+}
+
+class Papagaio : AvesQueVoam {
+    override fun setLocalizacao(latitude: Double, longitude: Double) {
+        println("Papagaio localizado em $latitude, $longitude")
+    }
+
+    override fun setAltitude(altitude: Double) {
+        println("Papagaio voando a $altitude metros de altitude")
+    }
+
+    override fun renderizar() {
+        println("Papagaio renderizado")
+    }
+}
+
+class Pinguim : Aves {
+    override fun setLocalizacao(latitude: Double, longitude: Double) {
+        println("Pinguim localizado em $latitude, $longitude")
+    }
+
+    override fun renderizar() {
+        println("Pinguim renderizado")
+    }
+}
+
+```
+
+Nesse exemplo, temos um conjunto de interfaces relacionadas a aves e duas implementações de aves específicas: `Papagaio` e `Pinguim`.
+
+As interfaces `Aves` e `AvesQueVoam` representam diferentes funcionalidades que algumas aves podem possuir. `AvesQueVoam` estende `Aves`, acrescentando a capacidade de definir altitude, indicando que algumas aves podem voar e ter uma altitude específica.
+
+A classe `Papagaio` implementa `AvesQueVoam`, o que significa que além de poder definir sua localização e renderizar, ele também pode definir sua altitude. Por outro lado, a classe `Pinguim` implementa apenas a interface `Aves`, indicando que, embora ele possa definir sua localização e ser renderizado, não possui a funcionalidade de voar e, portanto, não pode definir sua altitude.
+
+## DIP - Dependency Inversion Principle
+
+>**Princípio da Inversão de dependência:** Devemos depender de abstrações e não de abstrações.
+
+![DIP](images/DIP.webp)
+
+### Como podemos identificar uma classe que esta fora do DIP?
+
+Para identificar uma classe que está violando o Princípio da Inversão de Dependência (DIP), você deve observar como a classe lida com suas dependências, especialmente se ela está diretamente acoplada a classes concretas em vez de depender de abstrações. Aqui estão algumas dicas para identificar uma classe que não está aderindo ao DIP:
+
+**Dependências de Classes Concretas:** Se uma classe depende diretamente de outras classes concretas em vez de depender de interfaces ou abstrações, isso é um forte indicativo de uma violação do DIP. O DIP enfatiza que as classes de alto nível devem depender de abstrações, não de implementações concretas.
+
+**Falta de Injeção de Dependência:** Se a classe não faz uso de técnicas de injeção de dependência, como a injeção por construtor ou injeção por método, e em vez disso cria suas próprias instâncias de classes concretas, isso pode ser um sinal de que o DIP está sendo violado.
+
+**Dificuldade de Teste:** Se a classe é difícil de testar de forma isolada porque suas dependências são concretas e não podem ser facilmente substituídas por implementações de teste, isso é um indicativo de que o DIP não está sendo seguido.
+
+**Feedback de Revisões de Código:** Durante revisões de código por colegas de desenvolvimento, se outros membros da equipe identificarem que a classe está criando dependências fortes e diretas em classes concretas, isso é um indicativo de uma possível violação do DIP.
+
+**Falta de Flexibilidade:** Se a classe não consegue se adaptar facilmente a mudanças nas dependências ou requisitos, isso pode ser um sinal de que o DIP não está sendo respeitado. O DIP promove a flexibilidade e a capacidade de substituir facilmente as implementações das dependências.
+
+### Exemplo DIP
+
+```kotlin
+
+interface DBConnectionInterface {
+    fun connect()
+    fun disconnect()
+}
+
+class MySQLConnection : DBConnectionInterface {
+    override fun connect() {
+        println("Connecting to MySQL")
+    }
+
+    override fun disconnect() {
+        println("Disconnecting from MySQL")
+    }
+}
+
+class PostgreSQLConnection : DBConnectionInterface {
+    override fun connect() {
+        println("Connecting to PostgreSQL")
+    }
+
+    override fun disconnect() {
+        println("Disconnecting from PostgreSQL")
+    }
+}
+
+class DBConnection {
+    private lateinit var dbConnection: DBConnectionInterface
+
+    fun setDBConnection(dbConnection: DBConnectionInterface) {
+        this.dbConnection = dbConnection
+    }
+
+    fun connect() {
+        dbConnection.connect()
+    }
+
+    fun disconnect() {
+        dbConnection.disconnect()
+    }
+}
+
+```
+
 ## Referências
 
 ### Cursos
