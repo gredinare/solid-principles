@@ -390,6 +390,8 @@ class DBConnection {
 
 ```
 
+No contexto do DIP, este exemplo ilustra que a classe `DBConnection` depende da abstração `DBConnectionInterface` e pode ser configurada para utilizar qualquer implementação dessa interface (por exemplo, `MySQLConnection` ou `PostgreSQLConnection`) sem precisar modificar sua própria lógica interna. Isso torna o código mais flexível e extensível, pois novas implementações podem ser adicionadas sem alterar o código existente em `DBConnection`.
+
 ## Referências
 
 ### Cursos
